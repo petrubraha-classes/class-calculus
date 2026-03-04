@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 # hmm interesant if __name__== "__main__" :D 
 
-
+print("="*74)
 #EXERCITIUL 2
 u, _ = find_machine_precision()
 x = 1.0
@@ -64,6 +64,7 @@ for incercare in range(1,100_001):
 print(f"Timp total {time.time()-s:.4f} secunde")
 
 #EXERCITIUL 3
+print("=" * 74)
 avg_diff_libr_frac = 0.0
 avg_diff_libr_poly = 0.0
 
@@ -71,33 +72,44 @@ computation_time_libr = 0.0
 computation_time_frac = 0.0 
 computation_time_poly = 0.0
 
-for _ in range(0, 10_000):
+for i in range(0, 10_000):
     input = random.uniform(-math.pi / 2, math.pi / 2)
     while input == -math.pi / 2 or input == math.pi / 2:
         input = random.uniform(-math.pi / 2, math.pi / 2)
-    input = lib.normalize(input)
+    
+    try:
+        input = lib.normalize(input)
+    except IOError as e:
+        print(f"Iteratia {i}: {e}")
+        continue
 
     start_time = time.time()
     result_libr = math.tan(input)
-    computation_time_libr += time.time() - start_time
+    t_libr = time.time() - start_time
+    computation_time_libr += t_libr
 
     start_time = time.time()
     result_frac = lib.tan_cont_frac(input)
-    computation_time_frac += time.time() - start_time
+    t_frac = time.time() - start_time
+    computation_time_frac += t_frac
     diff_libr_frac = abs(result_libr - result_frac)
     avg_diff_libr_frac += diff_libr_frac
 
     start_time = time.time()
     result_poly = lib.tan_poly_approx(input)
-    computation_time_poly += time.time() - start_time
+    t_poly = time.time() - start_time
+    computation_time_poly += t_poly
     diff_libr_poly = abs(result_libr - result_poly)
     avg_diff_libr_poly += diff_libr_poly
+
+    lib.print_to_file("logger.txt", i, input, result_libr, result_frac, result_poly, t_libr, t_frac, t_poly)
 
 avg_diff_libr_frac /= 10_000
 avg_diff_libr_poly /= 10_000
 
-print(f"Average difference between library and continued fraction: {avg_diff_libr_frac:.2e}")
-print(f"Average difference between library and polynomial approximation: {avg_diff_libr_poly:.2e}")
-print(f"Total computation time for library function: {computation_time_libr:.4f} seconds")
-print(f"Total computation time for continued fraction approximation: {computation_time_frac:.4f} seconds")
-print(f"Total computation time for polynomial approximation: {computation_time_poly:.4f} seconds")
+print(f"Diferenta in medie dintre lib si fractii continue: {avg_diff_libr_frac:.2e}")
+print(f"Diferenta in medie dintre lib si folosind polinoame: {avg_diff_libr_poly:.2e}")
+print("=" * 74)
+print(f"Timp librarie: {computation_time_libr:.4f} seconds")
+print(f"Timp Lentz modificat: {computation_time_frac:.4f} seconds")
+print(f"Timp polinoame: {computation_time_poly:.4f} seconds")
