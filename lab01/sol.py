@@ -73,6 +73,9 @@ computation_time_poly = 0.0
 
 for _ in range(0, 10_000):
     input = random.uniform(-math.pi / 2, math.pi / 2)
+    while input == -math.pi / 2 or input == math.pi / 2:
+        input = random.uniform(-math.pi / 2, math.pi / 2)
+    input = lib.normalize(input)
 
     start_time = time.time()
     result_libr = math.tan(input)

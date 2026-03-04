@@ -1,3 +1,5 @@
+import math
+
 def get_next_a(a: float) -> float:
     """Return the next value of a for the continued fraction method."""
     return -(a ** 2)
@@ -5,6 +7,24 @@ def get_next_a(a: float) -> float:
 def get_next_b(b: float) -> float:
     """Return the next value of b for the continued fraction method."""
     return b + 2
+
+def normalize(input: float) -> tuple[float, float]:
+    """
+    Reduces the input complexity in cases it doesn't fit the (-pi/2, pi/2) interval.
+    Raise IOError if the input is equal to math.pi/2.
+    """
+    # anti-symmetry tan(x) = −tan(−x).
+    factor = 1.0
+    if input < 0:
+        input *= -1
+        factor *= -1
+    
+    # periodicity.
+    while input >= math.pi:
+        input -= math.pi
+    
+    if input == math.pi / 2:
+        raise IOError("Invalid floating-point number: tan(pi/2) is undefined")
 
 def tan_cont_frac (input: float) -> float:
     """Return an approximation of tan(input) using continuous functions, i.e. first method (Lentz)."""
