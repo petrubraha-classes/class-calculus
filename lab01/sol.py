@@ -71,7 +71,7 @@ computation_time_libr = 0.0
 computation_time_frac = 0.0 
 computation_time_poly = 0.0
 
-for iteration in range(0, 10_000):
+for _ in range(0, 10_000):
     input = random.uniform(-math.pi / 2, math.pi / 2)
 
     start_time = time.time()
