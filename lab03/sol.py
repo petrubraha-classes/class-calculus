@@ -91,6 +91,22 @@ def main(n: int | None):
     euclidian_norm = np.linalg.norm(x_house - x_lib)
     print(euclidian_norm)
 
+    #punctul 4
+    err_house_b = np.linalg.norm(a_init @ x_house - b_init)
+    print(f"Cat de bine satisface x_house sistemul: {err_house_b:.2e}")
+
+    err_lib_b = np.linalg.norm(a_init @ x_lib - b_init)
+    print(f"Cat de bine satisface x_lib sistemul {err_lib_b:.2e}")
+
+    err_house_s = np.linalg.norm(x_house - s) / np.linalg.norm(s)
+    print(f"Eroare fata de s (x_house) {err_house_s:.2e}")
+
+    err_lib_s = np.linalg.norm(x_lib - s) / np.linalg.norm(s)
+    print(f"Eroarem fata de s (x_lib)= {err_lib_s:.2e}")
+
+
+    
+
 if __name__ == "__main__":
     n = sys.argv[1]
     if n is not None:
