@@ -137,14 +137,14 @@ def main(n: int | None):
 
     #punctul 5
 
-    # calculează A^{-1} prin QR Householder (coloană cu coloană)
+    # calculeaza A^-1 prin QR Householder (coloana cu coloana)
     inv_house = compute_inverse_house(q_house, r_house)
  
-    # calculează A^{-1} prin librărie (referință)
+    # calculeaza A^-1 prin librarie (referinta)
     inv_lib = np.linalg.inv(a_init)
  
-    # ||A^{-1}_house - A^{-1}_lib||_2 — diferența dintre cele două inverse
-    print(f"||inv_house - inv_lib||     = {np.linalg.norm(inv_house - inv_lib):.2e}")
+    # ||A^{-1}_house - A^{-1}_lib||_2 — diferenaa dintre cele doua inverse
+    print(f"||inv_house - inv_lib||= {np.linalg.norm(inv_house - inv_lib):.2e}")
 
 
 if __name__ == "__main__":
