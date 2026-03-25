@@ -6,6 +6,13 @@ import sys
 
 EPSILON = 1e-8
 
+def display_matrix(matrix, name: str = "Matrix"):
+    """functie care afiseaza matriciile
+    also good for debugging """
+    print(f"\n{name}:")
+    print(matrix)
+    print()
+
 def identity_maxtrix(n: int):
     identity = np.zeros([n, n])
     for i in range(n):
@@ -113,6 +120,11 @@ def main(n: int | None):
 
     a_init = a.copy()
     b_init = b.copy()
+
+    # Afisam matricele la inceput
+    display_matrix(a_init, "Matricea A")
+    display_matrix(s, "Vectorul s")
+    display_matrix(b_init, "Vectorul b")
 
     q_house, r_house = qr_decomp_house(a.copy())
     q_lib, r_lib = qr_decomp_lib(a)
