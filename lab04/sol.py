@@ -162,13 +162,13 @@ def main():
     # precizia, default 1e-8
     eps = float(sys.argv[2]) if len(sys.argv) > 2 else EPSILON
 
-    for idx in range(1, 6):
-        b_path = os.path.join(folder, f"b_{idx}.txt")
+    for i in range(1, 6):
+        b_path = os.path.join(folder, f"b_{i}.txt")
         if not os.path.exists(b_path):
-            print(f"\nSistem {idx}: lipseste b_{idx}.txt, skip.")
+            print(f"\nSistem {i}: lipseste b_{i}.txt, skip.")
             continue
-        solve_system(folder, idx, eps)
+        solve_system(folder, i, eps)
 
 
 if __name__ == "__main__":
-    main()
+    main()  
